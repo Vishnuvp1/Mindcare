@@ -1,10 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 
 # Create your models here.
 
+
 class MyAccountManager(BaseUserManager):
-    def create_user(self, first_name, last_name, phone,username, email, password=None,):
+    def create_user(self, first_name, last_name, phone, username, email, password=None,):
         if not email:
             raise ValueError('User must have an email address')
 
@@ -12,25 +14,46 @@ class MyAccountManager(BaseUserManager):
             raise ValueError('User must have an username')
 
         user = self.model(
-            email = self.normalize_email(email),
-            username = username,
-            first_name = first_name,
-            last_name = last_name,
-            phone = phone
+            email=self.normalize_email(email),
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
+    def create_psychologist(self, first_name, last_name, phone, username, email, password=None):
+        if not email:
+            raise ValueError('User must have an email address')
+
+        psychologist = self.model(
+            email=self.normalize_email(email),
+            username=username,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone
+        )
+        psychologist.is_admin = False
+        psychologist.is_active = True
+        psychologist.is_staff = True
+        psychologist.is_superadmin = False
+        psychologist.is_verified = False
+        psychologist.set_password(password)
+        psychologist.save(using=self._db)
+        return psychologist
+
     def create_superuser(self, first_name, last_name, email, username, password, phone):
         user = self.create_user(
-            email = self.normalize_email(email),
-            username = username,
-            password = password,
-            first_name = first_name,
-            last_name = last_name,
-            phone= phone
+            email=self.normalize_email(email),
+            username=username,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+            phone=phone
         )
 
         user.is_admin = True
@@ -41,12 +64,13 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class Account(AbstractBaseUser,PermissionsMixin):
+
+class Account(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
     email = models.CharField(max_length=50, unique=True)
-    phone = models.CharField(max_length=50, unique=True)
+    phone = models.CharField(max_length=50, unique=True, blank=True)
 
     # Required
     date_joined = models.DateTimeField(auto_now_add=True)

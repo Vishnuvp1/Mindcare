@@ -1,0 +1,232 @@
+{% load static %}
+
+<!-- Header -->
+<header class="wrapp-header">
+			
+    <div class="header-box-01">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 text-xs-center">
+                    <a href="" class="logo ">
+                        <h2>MINDCARE</h2>
+                    </a>
+                </div>
+                <div class="col-sm-8 col-md-8 col-lg-8 text-xs-center text-right mr-2">
+                    {% if user.id is None %}
+                    <a href="{% url 'signin' %}" class="btn btn-primary" style="margin-top: 16px;">Login</a>
+                    {% else %}
+                    <a href="{% url 'signout' %}" class="btn btn-primary" style="margin-top: 16px;">Logout</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main navigation -->
+    <div class="header-box-02">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-nav">
+                        <div class="main-nav__btn">
+                            <div class="icon-left"></div>
+                            <div class="icon-right"></div>
+                        </div>
+                        <div class="header-box-03">
+                            <div class="shopping-cart">
+                                <a href="#" class="shopping-btn">
+                                    Shopping cart
+                                    <p class="shopping-info">2</p>
+                                </a>
+                                <div class="shopping-cart__dropdown">
+                                    <ul class="shopping-cart__list">
+                                        <li>
+                                            <table class="shopping-cart__table">
+                                                <tr>
+                                                    <td>
+                                                        <a class="shopping-cart__close" href="#">Close</a>
+                                                    </td>
+                                                    <td>
+                                                        <figure class="shopping-cart__img">
+                                                            <a href="#">
+                                                                <img src="{% static 'img/shop/shopping_cart/shopping_cart_img_01.jpg'  %}" alt="">
+                                                            </a>
+                                                        </figure>
+                                                    </td>
+                                                    <td>
+                                                        <h3 class="shopping-cart__title">
+                                                            <a href="#">Intuitions</a>
+                                                        </h3>
+                                                        <p class="shopping-cart__text">Dr. Sandra Miller</p>
+                                                        <p class="shopping-cart__price">
+                                                            <span>1 x</span>$ 100.00</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                        <li>
+                                            <table class="shopping-cart__table">
+                                                <tr>
+                                                    <td>
+                                                        <a class="shopping-cart__close" href="#">Close</a>
+                                                    </td>
+                                                    <td>
+                                                        <figure class="shopping-cart__img">
+                                                            <a href="#">
+                                                                <img src="{% static 'img/shop/shopping_cart/shopping_cart_img_02.jpg' %}" alt="">
+                                                            </a>
+                                                        </figure>
+                                                    </td>
+                                                    <td>
+                                                        <h3 class="shopping-cart__title">
+                                                            <a href="#">Happines</a>
+                                                        </h3>
+                                                        <p class="shopping-cart__text">Dr. Sandra Miller</p>
+                                                        <p class="shopping-cart__price">
+                                                            <span>1 x</span>$ 100.00</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </li>
+                                    </ul>
+                                    <p class="shopping-cart__subtotal">
+                                        <span>Subtotal:</span> $ 220.00</p>
+                                    <div class="shopping-cart__btn">
+                                        <a href="#" class="shopping-cart__btn-01">View cart</a>
+                                        <a href="#" class="shopping-cart__btn-02">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="search-box">
+                                <a class="search-btn" href="#">Search</a>
+                                <div class="search-box__dropdown">
+                                    <form action="https://livewp.site/html/optima/" class="search-box__form">
+                                        <input class="search-box__input" type="text" name="search_btn" placeholder="Search...">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="main-nav__list">
+                            <li class="active">
+                                <a href="{% url 'homepage' %}">Home</a>
+                                <!-- <ul>
+                                    <li>
+                                        <a href="index-2.html">Home 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="index_02.html">Home 2</a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <li>
+                                <a href="about_us.html">About</a>
+                                <ul>
+                                    <li>
+                                        <a href="about_me.html">About me</a>
+                                    </li>
+                                    <li>
+                                        <a href="about_us.html">About us</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{% url 'service' %}">Services</a>
+                                <!-- <ul>
+                                    <li>
+                                        <a href="services.html">Services page</a>
+                                    </li>
+                                    <li>
+                                        <a href="single_service.html">Single service</a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <li>
+                                <a href="#">Pages</a>
+                                <ul>
+                                    <li>
+                                        <a href="counselling.html">Counselling</a>
+                                    </li>
+                                    <li>
+                                        <a href="appointment.html">Appointment</a>
+                                    </li>
+                                    <li>
+                                        <a href="faq.html">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a href="team.html">Team</a>
+                                    </li>
+                                    <li>
+                                        <a href="team_member.html">Team member</a>
+                                    </li>
+                                    <li>
+                                        <a href="gallery.html">Gallery</a>
+                                    </li>
+                                    <li>
+                                        <a href="gallery_item.html">Gallery item</a>
+                                    </li>
+                                    <li>
+                                        <a href="shortcodes.html">Shortcodes</a>
+                                    </li>
+                                    <li>
+                                        <a href="typography.html">Typography</a>
+                                    </li>
+                                    <li>
+                                        <a href="coming_soon.html">Coming soon</a>
+                                    </li>
+                                    <li>
+                                        <a href="404.html">404</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="shop_listing.html">Shop</a>
+                                <ul>
+                                    <li>
+                                        <a href="shop_listing.html">Shop listing</a>
+                                    </li>
+                                    <li>
+                                        <a href="shop_item.html">Shop item</a>
+                                    </li>
+                                    <li>
+                                        <a href="shopping_cart.html">Shopping cart</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">News</a>
+                                <ul>
+                                    <li>
+                                        <a href="blog_fullwidth.html">Fullwidth Listing</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog_with_right_sidebar.html">With Right Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog_with_left_sidebar.html">With Left Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="blog_post_right_sidebar.html">Blog post</a>
+                                        <ul>
+                                            <li>
+                                                <a href="blog_post_fullwidth.html">Fullwidth</a>
+                                            </li>
+                                            <li>
+                                                <a href="blog_post_right_sidebar.html">With Right Sidebar</a>
+                                            </li>
+                                            <li>
+                                                <a href="blog_post_left_sidebar.html">With Left Sidebar</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="contacts.html">Contacts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

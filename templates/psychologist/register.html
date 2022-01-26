@@ -1,0 +1,35 @@
+{% extends 'psychologist/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="section-content padding-y">
+
+    <div class="card mx-auto shadow p-3 mb-5 bg-white rounded" style="max-width:520px; margin-top:11rem;">
+        <article class="card-body">
+
+            <header class="mb-4">
+                <h4 class="card-title mb-4 mt-3 text-center">Sign Up</h4>
+            </header>
+            <form action="{% url 'psychologist_register' %}" method="post" id="register_form" enctype='multipart/form-data'>
+                {% csrf_token %}
+
+                {{ form.email.errors }}
+                {{ form.phone.errors}}
+                {{ form.non_field_errors }}
+
+                {{form|crispy}}
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block mt-4"> Sign Up </button>
+                </div>
+            </form>
+        </article>
+    </div>
+    <p class="text-center mt-4">Have an account? <a href="{% url 'psychologist_signin' %}">Log In</a></p>
+    <br><br>
+</section>
+
+{% endblock %}
