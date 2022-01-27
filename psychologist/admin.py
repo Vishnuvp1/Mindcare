@@ -5,6 +5,7 @@ from psychologist.models import Psychologist
 # Register your models here.
 
 class PsychologistAdmin(admin.ModelAdmin):
-    list_display = ()
+    list_display = ('psychologist','date_of_birth', 'address', 'gender',
+                  'experience', 'resume', 'certificate')
 
-admin.site.register(Psychologist)
+admin.site.register(Psychologist, PsychologistAdmin)

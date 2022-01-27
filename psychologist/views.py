@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.views import View
 from django.contrib import messages, auth
+from accounts.forms import RegistrationForm
 from accounts.models import Account
 from psychologist.models import Psychologist
 from . forms import PsychologistForm
@@ -13,32 +14,29 @@ from django.contrib.auth import authenticate, login
 
 def register(request):
     if request.method == 'POST':
-        form = PsychologistForm(request.POST, request.FILES)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            data = Psychologist()
-            data.first_name = form.cleaned_data['first_name']
-            data.last_name = form.cleaned_data['last_name']
-            data.username = form.cleaned_data['username']
-            data.email = form.cleaned_data['email']
-            data.phone = form.cleaned_data['phone']
-            data.gender = form.cleaned_data['gender']
-            data.date_of_birth = form.cleaned_data['date_of_birth']
-            data.address = form.cleaned_data['address']
-            data.experience = form.cleaned_data['experience']
-            data.resume = form.cleaned_data['resume']
-            data.certificate = form.cleaned_data['certificate']
-            data.password = form.cleaned_data['password']
-            psychologist = Account.objects.create_psychologist(
-                first_name=data.first_name, last_name=data.last_name, phone=data.phone, username=data.username,
-                email=data.email, password=data.password)
-            data.save()
-            psychologist.save()
-            auth.login(request, psychologist)
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            username = email.split("@")[0]
+            password = form.cleaned_data['password']
+            user = Account.objects.create_psychologist(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                username=username,
+                phone=phone,
+                password=password)
+            auth.login(request, user)
             messages.success(request, "Registered")
             return redirect('psychologist_signin')
     else:
-        form = PsychologistForm(request.POST, request.FILES)
-    context = {'form': form}
+        form = RegistrationForm(request.POST)
+    context = {
+        'form': form,
+    }
     return render(request, 'psychologist/register.html', context)
 
 
@@ -47,17 +45,22 @@ def signin(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        psychologist = auth.authenticate(email=email, password=password)
-        if psychologist is not None:
-            if psychologist.is_staff:
-                auth.login(request, psychologist)
-                return redirect('psychologist_home')
-            else:
-                print('blocked')
+        user = auth.authenticate(email=email, password=password)
+        if user:
+            auth.login(request, user)
+            if user is not None:
+                if user.is_verified:
+                    return redirect('psychologist_home')
+                elif user.is_staff:
+                    print('staff')
+                    return redirect('psychologist_verify')
+                else:
+                    return redirect('psychologist_profile')
         else:
-            pass
-    else:
-        return render(request, 'psychologist/signin.html')
+            print('Not authenticated!!!!')
+   
+
+    return render(request, 'psychologist/signin.html')
 
 
 @login_required(login_url='psychologist_signin')
@@ -68,3 +71,42 @@ def homepage(request):
 def signout(request):
     auth.logout(request)
     return redirect('psychologist_signin')
+
+
+def profile(request):
+    print(request.user)
+    if request.method == 'POST':
+        user = request.user
+        form = PsychologistForm(request.POST, request.FILES)
+        if form.is_valid():
+            gender = form.cleaned_data['gender']
+            date_of_birth = form.cleaned_data['date_of_birth']
+            address = form.cleaned_data['address']
+            experience = form.cleaned_data['experience']
+            resume = form.cleaned_data['resume']
+            certificate = form.cleaned_data['certificate']
+            psy = Psychologist()
+            psy.psychologist = user
+            psy.gender = gender
+            psy.date_of_birth = date_of_birth
+            psy.address=address
+            psy.experience=experience
+            psy.resume=resume
+            psy.certificate=certificate
+            psy.save()
+            if not user.is_staff:
+                user.is_staff= True
+                user.save()
+
+            messages.success(request, "Signin")
+            return redirect('psychologist_verify')
+    else:
+        form = PsychologistForm(request.POST, request.FILES)
+    context = {
+        'form': form,
+    }
+    return render(request, 'psychologist/profile.html', context)
+
+
+def verify(request):
+    return render(request, 'psychologist/psychologist_verify.html')

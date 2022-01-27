@@ -31,15 +31,15 @@ class MyAccountManager(BaseUserManager):
 
         psychologist = self.model(
             email=self.normalize_email(email),
-            username=username,
-            password=password,
             first_name=first_name,
             last_name=last_name,
-            phone=phone
+            username=username,
+            phone=phone,
+            password=password,
         )
         psychologist.is_admin = False
         psychologist.is_active = True
-        psychologist.is_staff = True
+        psychologist.is_staff = False
         psychologist.is_superadmin = False
         psychologist.is_verified = False
         psychologist.set_password(password)

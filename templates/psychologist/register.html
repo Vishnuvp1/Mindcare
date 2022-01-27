@@ -7,7 +7,7 @@
 
 <section class="section-content padding-y">
 
-    <div class="card mx-auto shadow p-3 mb-5 bg-white rounded" style="max-width:520px; margin-top:11rem;">
+    <div class="card mx-auto shadow p-3 mb-5 bg-white rounded" style="max-width:520px; margin-top:3rem;">
         <article class="card-body">
 
             <header class="mb-4">
@@ -16,12 +16,12 @@
             <form action="{% url 'psychologist_register' %}" method="post" id="register_form" enctype='multipart/form-data'>
                 {% csrf_token %}
 
+                {{form|crispy}}
+
                 {{ form.email.errors }}
                 {{ form.phone.errors}}
                 {{ form.non_field_errors }}
 
-                {{form|crispy}}
-                
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block mt-4"> Sign Up </button>
                 </div>
