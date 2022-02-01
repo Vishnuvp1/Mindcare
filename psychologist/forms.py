@@ -8,5 +8,5 @@ class PsychologistForm(ModelForm):
 
     class Meta:
         model = Psychologist
-        fields = ('address', 'date_of_birth', 'gender',
-                  'experience', 'resume', 'certificate')
+        fields = ('profile_image', 'department', 'date_of_birth', 'gender',
+                  'experience', 'languages', 'skills', 'resume', 'certificate', 'fees')

@@ -1,44 +1,45 @@
 {% extends 'psychologist/base.html' %}
-{% load static %}
+
 {% block content %}
 
 
-    <section class="section-conten padding-y" style="min-height:84vh">
+<section class="section-conten padding-y" style="min-height:84vh">
 
-        <div class="card mx-auto shadow p-3 bg-white rounded" style="max-width: 380px; margin-top:150px;">
-            <div class="card-body">
-                <h4 class="card-title mt-4 mb-4 text-center">Psychologist - Sign in</h4>
-                
-                <form action="" method="post" id="usersigninform">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email Address" name="email">
-                    </div> 
-                    <div class="form-group mt-3">
-                        <input type="password" class="form-control" placeholder="Password" name="password">
-                    </div> 
+    <div class="card mx-auto shadow p-3 bg-white rounded" style="max-width: 380px; margin-top:150px;">
+        <div class="card-body">
+            {% include 'psychologist/includes/alerts.html' %}
+            <h4 class="card-title mt-4 mb-4 text-center">Psychologist - Sign in</h4>
 
-                    <div class="form-group mt-4">
-                        <a href="" class="float-end mb-4">Forgot password?</a>
+            <form action="" method="post" id="usersigninform">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email Address" name="email">
+                </div>
+                <div class="form-group mt-3">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
 
-                    </div> 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary w-100"> Login </button>
-                    </div> 
-                    <br>
-                </form>
+                <div class="form-group mt-4">
+                    <a href="" class="float-end mb-4">Forgot password?</a>
 
-
-
-            </div>
-        </div> 
-
-        <p class="text-center mt-4">Don't have account? <a href="{%  url 'psychologist_register' %}">Sign up</a></p>
-        <br><br>
-      
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary w-100"> Login </button>
+                </div>
+                <br>
+            </form>
 
 
-    </section>
+
+        </div>
+    </div>
+
+    <p class="text-center mt-4">Don't have account? <a href="{%  url 'psychologist_register' %}">Sign up</a></p>
+    <br><br>
+
+
+
+</section>
 
 
 {% endblock %}

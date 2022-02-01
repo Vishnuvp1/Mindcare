@@ -1,0 +1,144 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="wrapp-content">
+
+
+    <!-- Content -->
+    <main class="content-row team-member-page">
+        <div class="page-title-wrapp">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-title-01">Team Member</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="content-box-01 pad-top-38 pad-bt-57">
+            <div class="container">
+                <div style="background-color: #f6f8f9;" class="card p-3 shadow mb-5 rounded">
+                    <div class="row card-body">
+                        <div class="col-sm-7 col-md-7 col-lg-5 mt-lg-3">
+                            <figure class="team-member-img">
+                                <img src="{{psychologist.profile_image.url}}" alt="">
+                            </figure>
+                        </div>
+                        <div class="col-sm-5 col-md-5 col-lg-7">
+                            <div class="team-member-wrapp">
+
+                                        <h3 class="team-member-title">{{ psychologist.account.full_name }}</h3>
+                                     
+
+                                <table class="team-member-table table ">
+                                    <tr>
+                                        <td>Occupation:</td>
+                                        <td>{{psychologist.department}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Experience:</td>
+                                        <td>{{psychologist.experience}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Core skills:</td>
+                                        <td>{{psychologist.skills}}</td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Languages Speak</td>
+                                        <td>{{psychologist.languages}}</td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Session Fee</td>
+                                        <td>RS. {{psychologist.fees}}</td>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                                <a href="{% url 'payment' %}"  class="reply-box__btn text-white">Consult</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="mar-top-30 mar-bt-15">
+                            <strong>Biography</strong>
+                        </h4>
+                        <p>Dr. Emma Scott is a skilled and experienced Consultant Psychologist with a track record of
+                            delivering high-quality services for individuals with all common emotional difficulties and
+                            those with a diagnosis of personality disorder. She is experienced
+                            in service design and delivery, the
+                            <strong>management of multi-disciplinary teams</strong>, organisational consultancy, and
+                            development and delivery of both national and bespoke training to providers in the statutory
+                            and non-statutory sector.
+                        </p>
+                        <p>Having obtained a first degree in Psychology (BSc) at the
+                            <a href="#">
+                                <i>American College of Greece</i>
+                            </a>, she completed her doctoral training at the University of Surrey. Dr. Emma Scott is
+                            highly experienced in the assessment and treatment of depression, anxiety, substance misuse,
+                            personality disorder, eating disorders, obsessive compulsive disorder,
+                            adjustment disorder and relationship difficulties. She works with both individuals and
+                            couples and can offer therapy in English and Greek.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="mar-top-10 mar-bt-15">
+                            <strong>Personal Experience</strong>
+                        </h4>
+                        <p>Dr. Emma Scott has held a variety of clinical and managerial positions including her current
+                            one as Head of Service in an NHS Trust. Further she has held academic positions for the
+                            University of Surrey and the Institute of Mental Health lecturing
+                            on specialist postgraduate Masters and Doctorate programmes.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="reply-box">
+                            <h3 class="reply-box__title">
+                                <strong>Contact Me</strong>
+                            </h3>
+                            <div class="reply-box__comments">
+                                <form action="https://livewp.site/html/optima/" class="reply-box__comments-form">
+                                    <label class="reply-box__comments-box-01">
+                                        <input class="reply-box__input-text-01 reply-01" type="text" name="comm"
+                                            placeholder="Name *">
+                                    </label>
+                                    <label class="reply-box__comments-box-02">
+                                        <input class="reply-box__input-text-01 reply-01" type="email" name="comm"
+                                            placeholder="Email *">
+                                    </label>
+                                    <label class="reply-box__comments-box-03">
+                                        <input class="reply-box__input-text-01 reply-01" type="url" name="comm"
+                                            placeholder="Website">
+                                    </label>
+                                    <label class="reply-box__comments-box-04">
+                                        <textarea class="reply-box__textarea-01 reply-01" name="comm" cols="30"
+                                            rows="10" placeholder="Message"></textarea>
+                                    </label>
+                                    <button class="reply-box__btn" type="submit">Send a message</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
+
+
+
+{% endblock %}

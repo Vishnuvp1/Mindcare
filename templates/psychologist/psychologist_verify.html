@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Wait for the verification procedure, We will let You know you are eligibil for the post or not.</h1>
-    <a href="{% url 'psychologist_signout' %}" class="btn btn-primary" style="margin-top: 16px;">Logout</a>
-</body>
-</html>
+{% extends 'psychologist/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container w-50">
+    <div class="card card-block mt-5 shadow p-5 text-center">
+        <div class="card-body">
+
+    <h2>Wait for the verification procedure for atleast 3 working days, you will get a confirmation email if you are eligible for the post.</h2>
+    <a href="{% url 'psychologist_signout' %}" class="btn btn-outline-primary float-right mt-5">Logout</a>
+</div>
+</div>
+</div>
+
+
+    
+{% endblock %}

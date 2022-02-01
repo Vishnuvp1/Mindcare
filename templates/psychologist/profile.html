@@ -1,7 +1,31 @@
+{% extends 'psychologist/base.html' %}
+
 {% load static %}
 {% load crispy_forms_tags %}
-<form action="{% url 'psychologist_profile' %}" method="post" enctype='multipart/form-data'>
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit">Submit</button>
-</form>
+
+{% block content %}
+
+<section class="section-content padding-y">
+
+    <div class="card mx-auto shadow p-3 mb-5 bg-white rounded" style="max-width:520px; margin-top:3rem;">
+        <article class="card-body">
+
+            <header class="mb-4">
+                <h4 class="card-title mb-4 mt-3 text-center">Verification Form</h4>
+            </header>
+            <form action="{% url 'psychologist_profile' %}" method="post" id="register_form" enctype='multipart/form-data'>
+                {% csrf_token %}
+
+                {{form|crispy}}
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block mt-4"> Register</button>
+                </div>
+            </form>
+        </article>
+    </div>
+    <p class="text-center mt-4">Want to register later? <a href="{% url 'psychologist_signout' %}">Log out</a></p>
+    <br><br>
+</section>
+
+{% endblock %}

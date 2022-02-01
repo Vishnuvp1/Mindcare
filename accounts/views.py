@@ -18,9 +18,8 @@ def register(request):
             phone = form.cleaned_data['phone']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            username = email.split("@")[0]
             user = Account.objects.create_user(
-                first_name=first_name, last_name=last_name, email=email, username=username, password=password, phone=phone)
+                first_name=first_name, last_name=last_name, email=email, password=password, phone=phone)
 
             request.session['phone'] = phone
             send_otp(phone)

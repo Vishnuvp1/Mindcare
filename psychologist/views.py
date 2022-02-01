@@ -20,13 +20,11 @@ def register(request):
             last_name = form.cleaned_data['last_name']
             email = form.cleaned_data['email']
             phone = form.cleaned_data['phone']
-            username = email.split("@")[0]
             password = form.cleaned_data['password']
             user = Account.objects.create_psychologist(
                 first_name=first_name,
                 last_name=last_name,
                 email=email,
-                username=username,
                 phone=phone,
                 password=password)
             auth.login(request, user)
@@ -50,6 +48,7 @@ def signin(request):
             auth.login(request, user)
             if user is not None:
                 if user.is_verified:
+                    print('mail....')
                     return redirect('psychologist_home')
                 elif user.is_staff:
                     print('staff')
@@ -57,6 +56,7 @@ def signin(request):
                 else:
                     return redirect('psychologist_profile')
         else:
+            messages.error(request, 'Document deleted.')
             print('Not authenticated!!!!')
    
 
@@ -72,25 +72,33 @@ def signout(request):
     auth.logout(request)
     return redirect('psychologist_signin')
 
-
+@login_required(login_url='psychologist_signin')
 def profile(request):
     print(request.user)
     if request.method == 'POST':
         user = request.user
         form = PsychologistForm(request.POST, request.FILES)
         if form.is_valid():
+            profile_image = form.cleaned_data['profile_image']
             gender = form.cleaned_data['gender']
             date_of_birth = form.cleaned_data['date_of_birth']
-            address = form.cleaned_data['address']
+            fees = form.cleaned_data['fees']
+            department = form.cleaned_data['department']
             experience = form.cleaned_data['experience']
+            languages = form.cleaned_data['languages']
+            skills = form.cleaned_data['skills']
             resume = form.cleaned_data['resume']
             certificate = form.cleaned_data['certificate']
             psy = Psychologist()
-            psy.psychologist = user
+            psy.account = user
+            psy.profile_image = profile_image
             psy.gender = gender
             psy.date_of_birth = date_of_birth
-            psy.address=address
+            psy.fees=fees
+            psy.department=department
             psy.experience=experience
+            psy.languages=languages
+            psy.skills=skills
             psy.resume=resume
             psy.certificate=certificate
             psy.save()

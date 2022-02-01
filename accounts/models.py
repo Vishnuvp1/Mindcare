@@ -1,21 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-
 # Create your models here.
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, first_name, last_name, phone, username, email, password=None,):
+    def create_user(self, first_name, last_name, phone, email, password=None,):
         if not email:
             raise ValueError('User must have an email address')
 
-        if not username:
-            raise ValueError('User must have an username')
-
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
             first_name=first_name,
             last_name=last_name,
             phone=phone
@@ -25,7 +20,7 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_psychologist(self, first_name, last_name, phone, username, email, password=None):
+    def create_psychologist(self, first_name, last_name, phone, email, password=None):
         if not email:
             raise ValueError('User must have an email address')
 
@@ -33,7 +28,6 @@ class MyAccountManager(BaseUserManager):
             email=self.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
-            username=username,
             phone=phone,
             password=password,
         )
@@ -46,10 +40,9 @@ class MyAccountManager(BaseUserManager):
         psychologist.save(using=self._db)
         return psychologist
 
-    def create_superuser(self, first_name, last_name, email, username, password, phone):
+    def create_superuser(self, first_name, last_name, email, password, phone):
         user = self.create_user(
             email=self.normalize_email(email),
-            username=username,
             password=password,
             first_name=first_name,
             last_name=last_name,
@@ -68,9 +61,9 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    username = models.CharField(max_length=50, unique=True)
+    username = models.CharField(max_length=50, blank=True, null=True)
     email = models.CharField(max_length=50, unique=True)
-    phone = models.CharField(max_length=50, unique=True, blank=True)
+    phone = models.CharField(max_length=50, unique=True)
 
     # Required
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -82,7 +75,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'phone']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
 
     objects = MyAccountManager()
 
