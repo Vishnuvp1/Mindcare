@@ -10,6 +10,7 @@
                     <a href="" class="logo ">
                         <h2>MINDCARE</h2>
                     </a>
+                    <h6>Welcome {{request.user.full_name}}</h6>
                 </div>
                 <div class="col-sm-8 col-md-8 col-lg-8 text-xs-center text-right mr-2">
                     {% if user.id is None %}

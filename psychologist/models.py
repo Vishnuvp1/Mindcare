@@ -29,4 +29,13 @@ class Psychologist(models.Model):
         return reverse('psychologist-details', args=[self.id])
 
     def __str__(self):
-        return self.department
+        return self.account.email
+
+
+class ConsultTime(models.Model):
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    date = models.CharField(max_length=300, blank=True, null=True)
+    time = models.CharField(max_length=300, blank=True, null=True)
+
+    def __str__(self):
+        return self.date

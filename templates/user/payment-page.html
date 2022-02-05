@@ -1,0 +1,121 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mb-2">
+    <div class="p-5 mb-5">
+        <div class="row ">
+            <div class="col-lg-12 text-center">
+                <h3 class=" title-01--mr-07">Price Table</h3>
+            </div>
+        </div>
+        <div class="row  mt-3  justify-content-center">
+
+            <div class="col-sm-4 col-md-4 col-lg-5">
+                <div class="price-tables-01 price-tables-01-selected border">
+                    <figure class="price-tables-01__icon">
+                        <img src="{% static 'img/icons/table_price_icon_02.png' %}" alt="">
+                    </figure>
+                    <h3 class="price-tables-01__title mt-0">Session Pay</h3>
+                    <p class="price-tables-01__price">
+                        <span class="price-tables-01__price-cont">{{psy.fees}}</span>
+                        <span class="price-tables-01__price-icon">Rs.</span>
+                    </p>
+                    <div class="price-tables__content">
+                        <p>A space to explore emotions can help you to better recognise problematic.</p>
+                    </div>
+                    <div class="price-tables-btn-wrapp">
+                        <a href="{% url 'payment-completed' %}" class="price-tables-btn">Pay</a>
+                    </div>
+
+                    <div id="paypal-button-container" class="mt-4">
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var amount = "{{ psy.fees }}"
+    var url = "{% url 'payment' %}"
+    var csrftoken = getCookie('csrftoken');
+    var payment_method = 'PayPal'
+  
+
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        style: {
+            color: 'blue',
+            shape: 'rect',
+            label: 'pay',
+            height: 40
+        },
+
+        // Set up the transaction
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: amount,
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                // Show a success message to the buyer
+                console.log(details);
+                sendData();
+                function sendData() {
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json",
+                            "X-CSRFToken": csrftoken,
+                        },
+                        body: JSON.stringify({
+                            orderID: orderID,
+                            transID: details.id,
+                            payment_method: payment_method,
+                            status: details.status,
+                        }),
+                    })
+                        //.then((response) => response.json())
+                        //.then((data) => {
+                        //    window.location.href = redirect_url + '?order_number=' + data.order_number + '&payment_id=' + data.transID;
+                        //});
+                }
+            });
+        }
+
+
+    }).render('#paypal-button-container');
+</script>
+
+{% endblock %}

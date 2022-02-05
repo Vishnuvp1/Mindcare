@@ -1,0 +1,33 @@
+{% extends 'psychologist/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% include 'psychologist/includes/navbar.html' %}
+
+<section class="section-content padding-y" style="margin-bottom: 7rem;">
+
+    <div class="card mx-auto shadow p-3 mb-5 bg-white rounded" style="max-width:520px; margin-top:5rem;">
+        <article class="card-body">
+            {% include 'psychologist/includes/alerts.html' %}
+            <header class="mb-4">
+                <h4 class="card-title mb-4 mt-3 text-center">Add Available Dates</h4>
+            </header>
+            <form action="{% url 'psychologist_availability' %}" method="post" id="register_form" enctype='multipart/form-data'>
+                {% csrf_token %}
+
+                {{form|crispy}}
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block mt-4"> Add</button>
+                </div>
+            </form>
+        </article>
+    </div>
+   
+</section>
+
+{% include 'psychologist/includes/footer.html' %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div style="margin-top: 7rem; margin-bottom: 10rem;" class="container">
+    <div class="card shadow p- bg-white rounded">
+        <div class="row">
+            <div class="card-body text-center col-lg-6">
+                <img src="{% static 'img/pay.png'%}" alt="">
+
+            </div>
+            <div class="card-body col-lg-6 align-items-center d-flex flex-column justify-content-center">
+                <div>
+                    <h1>You got Appointment.</h1>
+                </div>
+                <div class="mt-4">
+                    <a href="{% url 'chat-room' %}" class="btn btn-outline-info">Chat</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}
