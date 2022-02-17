@@ -1,0 +1,56 @@
+{% load static %}
+    <nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y border-right">
+        <div class="logo d-flex justify-content-between">
+            <a class="text-center ml-1" href="index-2.html"> <h2>Mindcare</h2> </a>
+            <div class="sidebar_close_icon d-lg-none">
+                <i class="ti-close"></i>
+            </div>
+        </div>
+        <ul id="sidebar_menu">
+
+            <li class="mm-active">
+                <a class="" href="{% url 'adminpanel' %}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{% static 'adminpanel/img/menu-icon/dashboard.svg' %}" alt="">
+                    </div>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+           
+            <li class="">
+                <a href="{% url 'userlist' %}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{% static 'adminpanel/img/menu-icon/5.svg' %}" alt="">
+                    </div>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            <li class="">
+                <a href="{% url 'psychologistlist' %}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{% static 'adminpanel/img/menu-icon/6.svg' %}" alt="">
+                    </div>
+                    <span>Active Psychologists</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{% url 'guestpsychologist' %}" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{% static 'adminpanel/img/menu-icon/6.svg' %}" alt="">
+                    </div>
+                    <span>Guest Psychologists</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="calender.html" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{% static 'adminpanel/img/menu-icon/7.svg' %}" alt="">
+                    </div>
+                    <span>Calander</span>
+                </a>
+            </li>
+           
+     
+        </ul>
+    </nav>

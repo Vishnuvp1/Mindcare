@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<!-- Mirrored from demo.dashboardpack.com/sales-html/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 10 Feb 2022 09:42:08 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Marketing</title>
+
+
+    <link rel="stylesheet" href="{% static 'adminpanel/css/bootstrap.min.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'adminpanel/vendors/themefy_icon/themify-icons.css' %}" />
+    <link rel="stylesheet" href="{% static 'adminpanel/vendors/font_awesome/css/all.min.css' %}" />
+
+
+    <link rel="stylesheet" href="{% static 'adminpanel/vendors/scroll/scrollable.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'adminpanel/css/metisMenu.css' %}">
+
+    <link rel="stylesheet" href="{% static 'adminpanel/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'adminpanel/css/colors/default.css' %}" id="colorSkinCSS' %}">
+</head>
+
+<body class="crm_body_bg">
+
+    
+
+   
+
+        
+
+        <div class="main_content_iner mt-5">
+            <div class="container-fluid p-0">
+                <div class="row justify-content-center">
+                   
+                    <div class="col-lg-8 mt-5">
+                        <div class="white_box mb_30">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6">
+
+                                    <div class="modal-content cs_modal">
+                                        <div class="modal-header justify-content-center bg-primary border shadow-sm">
+                                            <h5 class="modal-title text_white">Log in</h5>
+                                        </div>
+                                        <div class="modal-body shadow-sm">
+                                            <form action="{% url 'adminsignin' %}" method="post">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control shadow-sm border" name="email"
+                                                        placeholder="Enter your email">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control shadow-sm border" name="password" placeholder="Password">
+                                                </div>
+                                                <button type="submit" class="btn_1 full_width text-center mt-5 mb-4">Log in</button>
+                                           
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ 
+
+
+
+
+    <div id="back-top" style="display: none;">
+        <a title="Go to Top" href="#">
+            <i class="ti-angle-up"></i>
+        </a>
+    </div>
+
+
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/metisMenu.js' %}"></script>
+
+    <script src="{% static 'vendors/scroll/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'vendors/scroll/scrollable-custom.js' %}"></script>
+
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+
+
+
+</html>

@@ -4,8 +4,8 @@ from urllib3 import HTTPResponse
 from accounts.models import Account
 from psychologist.models import ConsultTime, Psychologist
 import json
-
-from user.models import Appointment, Chat
+from django.contrib.auth.decorators import login_required
+from user.models import Appointment
 
 # Create your views here.
 
@@ -64,14 +64,7 @@ def paymentcompleted(request):
     return render(request, 'user/payment-completed.html')
 
 
-def chatroom(request):
-    id = request.session['id']
-    if Account.objects.filter(id=id).exists():
-        print("hi")
-
-    return render(request, 'user/chatroom.html')
-
-
+@login_required(login_url='signin')
 def appointment(request):
     user = request.user
     if request.method == 'POST':
@@ -82,16 +75,13 @@ def appointment(request):
         date = list[0]
         time = list[1]
         Appointment.objects.create(
-            first_name=account.first_name, 
+            first_name=account.first_name,
             last_name=account.last_name,
-            email=account.email, 
-            phone=account.phone, 
-            date=date, time=time, 
+            email=account.email,
+            phone=account.phone,
+            date=date, time=time,
             account=account
-            )
+        )
         return redirect('payment')
     return render(request, 'user/chatroom.html')
 
-
-def chat(request):
-    pass

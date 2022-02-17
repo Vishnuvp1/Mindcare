@@ -9,4 +9,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', include('user.urls')),
     path('psychologist/', include('psychologist.urls')),
+    path('chat/', include('chat.urls')),
+    path('adminpanel/', include('adminpanel.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

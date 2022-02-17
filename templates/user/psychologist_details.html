@@ -25,15 +25,15 @@
                 <div style="background-color: #f6f8f9;" class="card p-3 border-0 shadow mb-5 rounded">
                     <div class="row card-body">
                         <div class="col-sm-7 col-md-7 col-lg-5 mt-lg-3">
-                            <figure class="team-member-img shadow">
+                            <figure class="team-member-img shadow-sm">
                                 <img src="{{psychologist.profile_image.url}}" alt="">
                             </figure>
                         </div>
                         <div class="col-sm-5 col-md-5 col-lg-7">
                             <div class="team-member-wrapp">
 
-                                        <h3 class="team-member-title">{{ psychologist.account.full_name }}</h3>
-                                     
+                                <h3 class="team-member-title">{{ psychologist.account.full_name }}</h3>
+
 
                                 <table class="team-member-table table ">
                                     <tr>
@@ -59,45 +59,63 @@
                                         <td>RS. {{psychologist.fees}}</td>
                                         </td>
                                     </tr>
-
-                                   
-
+                                    
                                 </table>
+                                {% if psy %}
                                 <form action="{% url 'appointment' %}" method="post">
                                     {% csrf_token %}
-                                <div class="card">
-                                    <div class="card-body p-4">
-                                <div class="row  justify-content-between">
-                                {% for i in psy %}
-                                
-                                    <div class="card col-lg-3 col-sm-12  ml-2 ">
-                                        
-                                        <div class="card-body text-center p-1 d-flex">
-                                            <div class="col-2 pt-3">
-                                                <input type="radio" name="radio" value="{{i.date}},{{i.time}}" checked>
+                                    <div class="card shadow-sm rounded">
+                                        <div class="card-body">
+                                            <div class="row container justify-content-between">
+
+                                                {% for i in psy %}
+
+                                                <div class="card shadow-sm rounded col-lg-4 col-sm-12  ml-2">
+
+                                                    <div class="card-body text-center p-1 d-flex">
+                                                        <div class="col-2 pt-3">
+                                                            <input type="radio" name="radio"
+                                                                value="{{i.date}},{{i.time}}" checked>
+                                                        </div>
+                                                        <div class="col-10">
+                                                            <h5>{{i.date}}</h5>
+                                                            {{i.time}}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <br>
+
+                                                {% endfor %}
+
+                                                <br>
                                             </div>
-                                            <div class="col-10">
-                                                <h4>{{i.date}}</h4> 
-                                                {{i.time}}
-                                            </div>
-                                         
                                         </div>
                                     </div>
-                                    
-                                   
-                                    <br>
-                                    
-                                    {% endfor %}
-                                    <br>
+                                    <button type="submit" class="reply-box__btn text-white mt-3"
+                                        style="padding: 1.1rem 2.6rem;">Submit</button>
+                                        
+                                </form>
+                                {% else %}
+                                <div class="card shadow-sm rounded">
+                                    <div class="card-body">
+                                        <div class="row  justify-content-between">
+
+                                            <h3>No slots Available!</h3>
+
+                                            <br>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            </div>
-                                <button type="submit" class="reply-box__btn text-white mt-3 ">Submit</button>
-                            </form>
+
+                                {% endif %}
+                                <a href="{% url 'chat-room' %}" class="reply-box__btn1 text-white mt-3">Free chat</a>
 
                                 <br>
 
-                                <a href=""  class="reply-box__btn text-white mt-3">Free chat</a>
+                              
                             </div>
                         </div>
                     </div>

@@ -5241,8 +5241,32 @@ ol li::before {
 	letter-spacing: 0.5px;
 }
 
+.reply-box__btn1 {
+	font-size: 12px;
+	line-height: 14px;
+	color: #fff;
+	font-weight: 700;
+	background-color: #166d8a;
+	padding: 18px 31px;
+	border: none;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	text-transform: uppercase;
+	display: inline-block;
+	vertical-align: middle;
+	-webkit-transition: 0.5s all;
+	transition: 0.5s all;
+	letter-spacing: 0.5px;
+}
+
 .reply-box__btn:hover {
-	background-color: #3d3272;
+	background-color: #5cbdce;
+	-webkit-transition: 0.5s all;
+	transition: 0.5s all;
+}
+
+.reply-box__btn1:hover {
+	background-color: #1784a8;
 	-webkit-transition: 0.5s all;
 	transition: 0.5s all;
 }

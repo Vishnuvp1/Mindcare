@@ -18,17 +18,6 @@ class Payment(models.Model):
         return self.payment_method
 
 
-class ChatRoom(models.Model):
-    user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    name = models.CharField(max_length=500)
-
-
-class Chat(models.Model):
-    message = models.CharField(max_length=1000)
-    date = models.DateTimeField(default=datetime.now, blank=True)
-    user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    room = models.CharField(max_length=1000)
-
 
 class Appointment(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)

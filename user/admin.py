@@ -1,10 +1,8 @@
 from django.contrib import admin
-from user.models import Appointment, Payment, ChatRoom, Chat
+from user.models import Appointment, Payment
 
 
 # Register your models here.
 
 admin.site.register(Payment)
-admin.site.register(ChatRoom)
-admin.site.register(Chat)
 admin.site.register(Appointment)

@@ -34,7 +34,7 @@ class Psychologist(models.Model):
 
 class ConsultTime(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    date = models.CharField(max_length=300, blank=True, null=True)
+    date = models.CharField("Date (MM/DD/YYYY):",max_length=300, blank=True, null=True)
     time = models.CharField(max_length=300, blank=True, null=True)
 
     def __str__(self):

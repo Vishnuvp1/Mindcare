@@ -1,0 +1,46 @@
+{% extends 'adminpanel/base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="container">
+    <h4 class="ml-3 mt-5 mb-4">ACTIVE PSYCHOLOGIST</h4>
+
+    <div class="col-12" id="tables">
+        <table class="table table-striped table-bordered table-hover bg-white shadow" id="myTable">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Department</th>
+                    <th>Block</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr class="align-middle">
+                    <th scope="row"> {{forloop.counter}} </th>
+                    <td>{{user.account.first_name}} {{user.account.last_name}}</td>
+                    <td>{{user.account.email}}</td>
+                    <td>{{user.account.phone}}</td>
+                    <td>{{user.department}}</td>
+                    <td>Block</td>
+                    <td>Delete</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+</script>
+
+{% endblock %}
